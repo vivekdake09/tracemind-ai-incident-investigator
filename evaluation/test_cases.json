@@ -1,0 +1,65 @@
+[
+  {
+    "id": "EVAL-001",
+    "category": "database_timeout",
+    "title": "Checkout service database pool starvation",
+    "logs": "psycopg2.OperationalError: connection to server at 'db-prod-pg.internal' (10.0.3.45), port 5432 failed: FATAL: remaining connection slots are reserved for non-replication superuser connections\ntimeout expired while waiting for free connection pool slot",
+    "expected_primary_hypothesis_keywords": ["database", "connection", "timeout", "route", "pool"],
+    "expected_evidence_ids": ["incident_INC-001", "runbook_db_timeouts.md"],
+    "expect_insufficient_evidence": false
+  },
+  {
+    "id": "EVAL-002",
+    "category": "authentication_error",
+    "title": "B2B Gateway rejected OAuth tokens across tenant cluster",
+    "logs": "HTTP 401 Unauthorized: Signature verification failed for token alg=RS256 key_id=prod-2026-q3\nFailed to authenticate inbound request for tenant_id=4519",
+    "expected_primary_hypothesis_keywords": ["jwt", "key", "rotation", "restart", "signature"],
+    "expected_evidence_ids": ["incident_INC-003", "runbook_auth_errors.md"],
+    "expect_insufficient_evidence": false
+  },
+  {
+    "id": "EVAL-003",
+    "category": "missing_configuration",
+    "title": "Billing worker crashed immediately after Helm chart deploy",
+    "logs": "KeyError: 'INVENTORY_DB_URL' not found in os.environ during AppConfig initialization\nContainer terminated with exit code 1 (CrashLoopBackOff)",
+    "expected_primary_hypothesis_keywords": ["environment", "helm", "configuration", "missing", "variable"],
+    "expected_evidence_ids": ["incident_INC-005", "runbook_config_missing.md"],
+    "expect_insufficient_evidence": false
+  },
+  {
+    "id": "EVAL-004",
+    "category": "cache_oom",
+    "title": "User session store rejecting write commands under load",
+    "logs": "Redis::CommandError: OOM command not allowed when used memory > 'maxmemory' on cluster shard 2\nEviction rate 0 keys/sec (policy: noeviction)",
+    "expected_primary_hypothesis_keywords": ["redis", "oom", "ttl", "memory", "cache"],
+    "expected_evidence_ids": ["incident_INC-004", "runbook_cache_oom.md"],
+    "expect_insufficient_evidence": false
+  },
+  {
+    "id": "EVAL-005",
+    "category": "rate_limiting",
+    "title": "Payout processor failing with HTTP 429 from Stripe gateway",
+    "logs": "HTTP 429 Too Many Requests: Rate limit exceeded for endpoint /v1/charges with concurrent workers=50\nImmediate retry attempt 5 also returned 429",
+    "expected_primary_hypothesis_keywords": ["rate", "limit", "retry", "jitter", "backoff"],
+    "expected_evidence_ids": ["incident_INC-006", "runbook_rate_limiting.md"],
+    "expect_insufficient_evidence": false
+  },
+  {
+    "id": "EVAL-006",
+    "category": "unrelated_logs",
+    "title": "Unknown proprietary edge gateway packet framing error",
+    "logs": "CustomFPGAFrameParser: sync word 0xDEADBEEF corrupted on physical interface pcie0: crc32 checksum mismatch in ring buffer",
+    "expected_primary_hypothesis_keywords": [],
+    "expected_evidence_ids": [],
+    "expect_insufficient_evidence": true
+  },
+  {
+    "id": "EVAL-007",
+    "category": "contradictory_evidence",
+    "title": "Ambiguous GraphQL query parsing error",
+    "logs": "GraphQL execution error: syntax error in user search query string '\"shoes OR (sneakers AND' at pos 14: unexpected EOF",
+    "expected_primary_hypothesis_keywords": [],
+    "expected_evidence_ids": [],
+    "expect_insufficient_evidence": true
+  }
+]

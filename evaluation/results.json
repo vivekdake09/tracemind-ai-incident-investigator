@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-11 19:25:39 UTC",
+    "total_cases": 7,
+    "evaluation_mode": "local_offline_baseline",
+    "model": "Deterministic Offline Engine",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "vector_store": "ChromaDB (persistent)",
+    "limitations_note": "Evaluation was conducted on a curated synthetic dataset of 7 incident scenarios. While high accuracy reflects clean grounding and semantic alignment on targeted failure modes, larger multi-service production topologies with noisy distributed logs will exhibit lower real-world recall."
+  },
+  "metrics": {
+    "recall_at_5": 1.0,
+    "top_1_diagnosis_accuracy": 1.0,
+    "evidence_support_rate": 1.0,
+    "schema_validity_rate": 1.0,
+    "abstention_accuracy": 1.0
+  },
+  "cases": [
+    {
+      "id": "EVAL-001",
+      "category": "database_timeout",
+      "title": "Checkout service database pool starvation",
+      "retrieval_hit": true,
+      "retrieved_ids": [
+        "runbook_db_timeouts.md",
+        "incident_INC-001",
+        "incident_INC-007"
+      ],
+      "schema_valid": true,
+      "top1_diagnosis_match": true,
+      "abstained_correctly": true,
+      "cited_ids_valid": "2/2"
+    },
+    {
+      "id": "EVAL-002",
+      "category": "authentication_error",
+      "title": "B2B Gateway rejected OAuth tokens across tenant cluster",
+      "retrieval_hit": true,
+      "retrieved_ids": [
+        "incident_INC-003",
+        "runbook_auth_errors.md",
+        "incident_INC-006"
+      ],
+      "schema_valid": true,
+      "top1_diagnosis_match": true,
+      "abstained_correctly": true,
+      "cited_ids_valid": "2/2"
+    },
+    {
+      "id": "EVAL-003",
+      "category": "missing_configuration",
+      "title": "Billing worker crashed immediately after Helm chart deploy",
+      "retrieval_hit": true,
+      "retrieved_ids": [
+        "incident_INC-005",
+        "runbook_config_missing.md",
+        "incident_INC-001"
+      ],
+      "schema_valid": true,
+      "top1_diagnosis_match": true,
+      "abstained_correctly": true,
+      "cited_ids_valid": "2/2"
+    },
+    {
+      "id": "EVAL-004",
+      "category": "cache_oom",
+      "title": "User session store rejecting write commands under load",
+      "retrieval_hit": true,
+      "retrieved_ids": [
+        "runbook_cache_oom.md",
+        "incident_INC-004",
+        "runbook_db_timeouts.md"
+      ],
+      "schema_valid": true,
+      "top1_diagnosis_match": true,
+      "abstained_correctly": true,
+      "cited_ids_valid": "2/2"
+    },
+    {
+      "id": "EVAL-005",
+      "category": "rate_limiting",
+      "title": "Payout processor failing with HTTP 429 from Stripe gateway",
+      "retrieval_hit": true,
+      "retrieved_ids": [
+        "incident_INC-006",
+        "runbook_rate_limiting.md",
+        "incident_INC-001"
+      ],
+      "schema_valid": true,
+      "top1_diagnosis_match": true,
+      "abstained_correctly": true,
+      "cited_ids_valid": "2/2"
+    },
+    {
+      "id": "EVAL-006",
+      "category": "unrelated_logs",
+      "title": "Unknown proprietary edge gateway packet framing error",
+      "retrieval_hit": "N/A (unrelated)",
+      "retrieved_ids": [
+        "incident_INC-008",
+        "incident_INC-006",
+        "incident_INC-004"
+      ],
+      "schema_valid": true,
+      "top1_diagnosis_match": false,
+      "abstained_correctly": true,
+      "cited_ids_valid": "0/0"
+    },
+    {
+      "id": "EVAL-007",
+      "category": "contradictory_evidence",
+      "title": "Ambiguous GraphQL query parsing error",
+      "retrieval_hit": "N/A (unrelated)",
+      "retrieved_ids": [
+        "incident_INC-005",
+        "incident_INC-002",
+        "runbook_db_timeouts.md"
+      ],
+      "schema_valid": true,
+      "top1_diagnosis_match": false,
+      "abstained_correctly": true,
+      "cited_ids_valid": "0/0"
+    }
+  ]
+}
