@@ -1,0 +1,16 @@
+[server]
+# Disables Streamlit's deep module inspection watcher which triggers
+# unused lazy imports in transformers (such as torchvision)
+fileWatcherType = "none"
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#2563EB"
+backgroundColor = "#F8FAFC"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#0F172A"
+font = "sans serif"
