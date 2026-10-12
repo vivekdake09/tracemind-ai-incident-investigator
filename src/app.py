@@ -9,6 +9,17 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+# Guard against Streamlit watcher attempting to inspect optional multi-modal submodules in transformers
+if "torchvision" not in sys.modules:
+    try:
+        import torchvision
+    except ImportError:
+        from unittest.mock import MagicMock
+        sys.modules["torchvision"] = MagicMock()
+        sys.modules["torchvision.transforms"] = MagicMock()
+        sys.modules["torchvision.transforms.v2"] = MagicMock()
+        sys.modules["torchvision.transforms.v2.functional"] = MagicMock()
+
 from src.investigator import Investigator, PRIMARY_MODEL, FALLBACK_MODELS
 from src.schemas import InvestigationReport
 from src.log_parser import MAX_LOG_LENGTH, MAX_STACK_LENGTH, MAX_TITLE_LENGTH
